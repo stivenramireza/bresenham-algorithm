@@ -27,10 +27,11 @@ public class Bresenham extends JPanel {
     int w =  size.width - insets.left - insets.right;
     int h =  size.height - insets.top - insets.bottom;
 
-    paintLine(g2d, w, h);
+    // paint1(g2d, w, h);
+    paint2(g2d, w, h);
   }
   
-  public void paintLine(Graphics g2d, int w, int h) {
+  public void paint1(Graphics g2d, int w, int h) {
     int x1 = 50;
     int y1 = 50;
     int x2 = 150;
@@ -49,6 +50,32 @@ public class Bresenham extends JPanel {
     for (int x = x1; x <= x2; x++) {
         int xp = x + w / 2;
         int yp = h / 2 - y;
+        g2d.drawLine(xp, yp, xp, yp);
+        if (d <= 0) {
+           d += incE;
+        } else {
+           d += incNE;
+           y += 1;
+        }
+    }
+  }
+  
+  public void paint2(Graphics g2d, int w, int h) {
+    int x1 = 300;
+    int y1 = 0;
+    int x2 = 400;
+    int y2 = 300;
+    int dx = Math.abs(x2 - x1);
+    int dy = Math.abs(y2 - y1);
+
+    int incE = 2 * dy;
+    int incNE = 2 * dy - 2 * dx;
+    int d = 2 * dy - dx;
+    int y = y1;  
+
+    for (int x = x1; x < x2; x++) {
+        int xp = x;
+        int yp = h - y;
         g2d.drawLine(xp, yp, xp, yp);
         if (d <= 0) {
            d += incE;
