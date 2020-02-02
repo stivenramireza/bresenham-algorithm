@@ -48,15 +48,15 @@ public class Bresenham extends JPanel {
   }
   
   public void paint2(Graphics g2d, int w, int h) {
-      for(int dx = 0; dx < w; dx += 10) {
-          paintLines(g2d, dx, 0, w, dx, w, h);
-          paintLines(g2d, w, dx, w - dx, h, w, h);
-          paintLines(g2d, w - dx, h, 0, h - dx, w, h);
-          paintLines(g2d, 0, h - dx, dx, 0, w, h);
+      for(int dx = 0; dx < w; dx += 50) {
+          paintLines(g2d, dx, 0, w, dx, h);
+          //paintLines(g2d, w, dx, w - dx, h, w, h);
+          //paintLines(g2d, w - dx, h, 0, h - dx, w, h);
+          ///paintLines(g2d, 0, h - dx, dx, 0, w, h);
       }
   }
   
-  public void paintLines(Graphics g2d, int x0, int y0, int x1, int y1, int w, int h) {
+  public void paintLines(Graphics g2d, int x0, int y0, int x1, int y1, int h) {
       Point p0 = new Point(x0, y0);
       Point p1 = new Point(x1, y1);
       List<Point> points = applyBresenham(p0, p1);
