@@ -23,7 +23,7 @@ public class Bresenham extends JPanel {
    }
   
   /**
-   * Paint Window.
+   * Paint window.
    * 
    * @param g Graphics 2D
    */  
@@ -88,11 +88,11 @@ public class Bresenham extends JPanel {
    * Paint lines based on Bresenham algorithm.
    * 
    * @param g2d Graphics 2D
-   * @param x0 Coordinate x0
-   * @param y0 Coordinate y0
-   * @param x1 Coordinate x1
-   * @param y1 Coordinate y1
-   * @param h Windows height
+   * @param x0 coordinate
+   * @param y0 coordinate
+   * @param x1 coordinate
+   * @param y1 coordinate
+   * @param h Window height
    */
   public void paintLines(Graphics g2d, int x0, int y0, int x1, int y1, int h) {
       Point p0 = new Point(x0, y0);
