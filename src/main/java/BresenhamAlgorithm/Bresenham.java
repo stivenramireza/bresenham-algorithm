@@ -10,12 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of Bresenham Algorithm
+ * Implementation of Bresenham Algorithm.
+ * 
  * @author stivenramireza
  * @version 1.0
  */
 public class Bresenham extends JPanel {
+    private int exercise;
     
+   public Bresenham(int exercise) {
+       this.exercise = exercise;
+   }
+  
+  /**
+   * Paint Window.
+   * 
+   * @param g Graphics 2D
+   */  
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
@@ -27,11 +38,21 @@ public class Bresenham extends JPanel {
 
     int w =  size.width - insets.left - insets.right;
     int h =  size.height - insets.top - insets.bottom;
-
-    // paint1(g2d, w, h);
-    paint2(g2d, w, h);
+    
+    if(exercise == 1) {
+        paint1(g2d, w, h);
+    }else if(exercise == 2) {
+        paint2(g2d, w, h);
+    }
   }
   
+  /**
+   * Execute class challenge.
+   * 
+   * @param g2d Graphics 2D
+   * @param w Window width
+   * @param h Window height
+   */
   public void paint1(Graphics g2d, int w, int h) {
     Point p0 = new Point(50, 50);
     Point p1 = new Point(150, 100);
@@ -47,15 +68,32 @@ public class Bresenham extends JPanel {
     }
   }
   
+  /**
+   * Execute homework challenge.
+   * 
+   * @param g2d Graphics 2D
+   * @param w Window width
+   * @param h Window height
+   */
   public void paint2(Graphics g2d, int w, int h) {
-      for(int dx = 0; dx < w; dx += 50) {
+      for(int dx = 0; dx < w; dx += 10) {
           paintLines(g2d, dx, 0, w, dx, h);
-          //paintLines(g2d, w, dx, w - dx, h, w, h);
-          //paintLines(g2d, w - dx, h, 0, h - dx, w, h);
-          ///paintLines(g2d, 0, h - dx, dx, 0, w, h);
+          paintLines(g2d, w, dx, w - dx, h, h);
+          paintLines(g2d, w - dx, h, 0, h - dx, h);
+          paintLines(g2d, 0, h - dx, dx, 0, h);
       }
   }
   
+  /**
+   * Paint lines based on Bresenham algorithm.
+   * 
+   * @param g2d Graphics 2D
+   * @param x0 Coordinate x0
+   * @param y0 Coordinate y0
+   * @param x1 Coordinate x1
+   * @param y1 Coordinate y1
+   * @param h Windows height
+   */
   public void paintLines(Graphics g2d, int x0, int y0, int x1, int y1, int h) {
       Point p0 = new Point(x0, y0);
       Point p1 = new Point(x1, y1);
@@ -67,32 +105,64 @@ public class Bresenham extends JPanel {
       }
   }
   
+  /**
+   * Source: https://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#Java
+   * 
+   * @param p1 Point 1
+   * @param p2 Point 2
+   * @return List of points to paint
+   */
   public List<Point> applyBresenham(Point p1, Point p2) {
     int x1 = p1.getX();
     int y1 = p1.getY();
     int x2 = p2.getX();
     int y2 = p2.getY();
     List<Point> points = new ArrayList<>();
-    int dy = Math.abs(y2 - y1);
-    int dx = Math.abs(x2 - x1);
-     
+    int dy = y2 - y1;
+    int dx = x2 - x1;
+    int incYi, incXi, incXf, incYf;
+    if (dy >= 0) {
+        incYi = 1;
+    } else {
+        dy = -dy;
+        incYi = -1;
+    }
+    if (dx >= 0) {
+        incXi = 1;
+    } else {
+        dx = -dx;
+        incXi = -1;
+    }
+    if (dx >= dy) {
+        incYf = 0;
+        incXf = incXi;
+    } else {
+        incXf = 0;
+        incYf = incYi;
+        dx ^= dy;
+        dy ^= dx;
+        dx ^= dy;
+    }
+    int x = x1;
+    int y = y1;
     int incE = 2 * dy;
-    int incNE = 2 * dy - 2 * dx;
-    int d = 2 * dy - dx;
-    int y = y1;  
-      
-    for (int x = x1; x <= x2; x++) {
+    int d = incE - dx;
+    int incNE = d - dx;
+    while(x != x2){
         int xp = x;
         int yp = y;
         points.add(new Point(xp, yp));
         if (d <= 0) {
-           d += incE;
+            x += incXf;
+            y += incYf;
+            d += incE;
         } else {
-           d += incNE;
-           y += 1;
+            x += incXi;
+            y += incYi;
+            d += incNE;
         }
     }
-    return points;
+    return points;    
   }
   
 }
