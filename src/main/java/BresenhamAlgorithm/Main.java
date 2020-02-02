@@ -3,8 +3,7 @@ package BresenhamAlgorithm;
 import javax.swing.JFrame;
 
 /**
- *
- * Implementation of Bresenham Algorithm.
+ * Implementation of Bresenham Algorithm
  * @author stivenramireza
  * @version 1.0
  */
