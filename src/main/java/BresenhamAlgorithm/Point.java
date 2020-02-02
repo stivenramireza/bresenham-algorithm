@@ -5,6 +5,7 @@ package BresenhamAlgorithm;
  * 
  * @author stivenramireza
  * @version 1.0
+ * @date 01/02/2020
  */
 public class Point {
     

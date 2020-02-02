@@ -14,6 +14,7 @@ import java.util.List;
  * 
  * @author stivenramireza
  * @version 1.0
+ * @date 01/02/2020
  */
 public class Bresenham extends JPanel {
     private int exercise;
